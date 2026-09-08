@@ -105,7 +105,7 @@ function addTask() {
 //deleting a task
     deleteButton.addEventListener("click", function() {
         listItem.remove();
-        updatecounters();
+        updateCounters();
     });
 
 //within each list item, we have a check box, the task name, then edit button and a delete button iamgine like html <li> input span button button</li> within each list item that gets added
@@ -128,17 +128,20 @@ function addTask() {
 function updateCounters() {
     const totalTasks = listContainer.children.length;
 
-    const completedTasks = listContainer.querySelectorAll("input[type='checkbox']:checked").length;
+    const completedTasks = listContainer.querySelectorAll(
+        "input[type='checkbox']:checked"
+    ).length;
 
     const uncompletedTasks = totalTasks - completedTasks;
 
     completedCounter.textContent = completedTasks;
     uncompletedCounter.textContent = uncompletedTasks;
 
-    if (totalTasks > 0 && uncompletedCounter == totalTasks) {
-        alert("You're all caught up!")
+    if (totalTasks > 0 && uncompletedTasks === 0) {
+        alert("You're all caught up!");
     }
 }
+
 updateCounters();
 
 //this is not my code i just wanted a pretty cursor 
