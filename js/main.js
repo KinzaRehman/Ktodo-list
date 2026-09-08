@@ -36,7 +36,8 @@ resetButton.addEventListener("click", function() {
 
 function addTask() {
     const taskText = inputBox.value.trim(); //triming anytextra spaces 
-//when theres nothing we can ask the person to enter a task
+
+    //when theres nothing we can ask the person to enter a task
     if (taskText === "") {
         errorMessage.textContent = "Please enter a task.";
         inputBox.focus();
@@ -44,28 +45,31 @@ function addTask() {
     }
 
     errorMessage.textContent = ""; //if theres nothing in the box they get an error message
-        //first create the the elemtns for each thing like lists, buttons, delete button, edit button,  all of the constants are things that we need like variables 
+
+    //first create the the elemtns for each thing like lists, buttons, delete button, edit button,  all of the constants are things that we need like variables 
     const listItem = document.createElement("li"); //we need lsit elements
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
 
-    const taskName = document.createElement("span");// the span area is where the tak gets placed they can not directly edit the button unless the press the edit button
+    const taskName = document.createElement("span"); // the span area is where the tak gets placed they can not directly edit the button unless the press the edit button
     taskName.textContent = taskText;
     taskName.contentEditable = "false";
 
-    const editButton = document.createElement("button");//this allows them to edit thier indivudal tasks
+    const editButton = document.createElement("button"); //this allows them to edit thier indivudal tasks
     editButton.textContent = "Edit";
     editButton.type = "button";
 
-    const deleteButton = document.createElement("button");//allows them to delte their task
+    const deleteButton = document.createElement("button"); //allows them to delte their task
     deleteButton.textContent = "Delete";
     deleteButton.type = "button";
+
     //if theyre done with the task this function allows them to check it off as completed works with css to check it off
     checkbox.addEventListener("change", function() {
         taskName.classList.toggle("completed", checkbox.checked);
         updateCounters();
     });
+
     //this is to edit tasks and then once edited save with the saveEditedTask fucntion
     editButton.addEventListener("click", function() {
         const isEditing = taskName.contentEditable === "true";
@@ -76,7 +80,6 @@ function addTask() {
             taskName.contentEditable = "true";
             taskName.focus();
             editButton.textContent = "Save";
-            updateCounters();
         }
     });
 
@@ -95,6 +98,7 @@ function addTask() {
         errorMessage.textContent = "";
         inputBox.focus();
     }
+
     //this is from youtube so they can press enter to save a task rather than a mouse click 
     taskName.addEventListener("keydown", function(event) {
         if (event.key === "Enter") {
@@ -102,25 +106,28 @@ function addTask() {
             saveEditedTask();
         }
     });
-//deleting a task
+
+    //deleting a task
     deleteButton.addEventListener("click", function() {
         listItem.remove();
         updateCounters();
     });
 
-//within each list item, we have a check box, the task name, then edit button and a delete button iamgine like html <li> input span button button</li> within each list item that gets added
+    //within each list item, we have a check box, the task name, then edit button and a delete button iamgine like html <li> input span button button</li> within each list item that gets added
     listItem.appendChild(checkbox);
     listItem.appendChild(taskName);
     listItem.appendChild(editButton);
     listItem.appendChild(deleteButton);
-//this takes the li in the container and allows it to show on the page
+
+    //this takes the li in the container and allows it to show on the page
     listContainer.appendChild(listItem);
-//clreaing the input and returning to input
+
+    //clreaing the input and returning to input
     inputBox.value = "";
     inputBox.focus();
 
     // Update the numbers after adding the task
-    updatecounters();
+    updateCounters();
 }
 
 //if its checked then + 1 if not checked then also plus one then calcuate the compelte is taking the sum of all checked, and uncomplete is total - checked
@@ -145,24 +152,24 @@ function updateCounters() {
 updateCounters();
 
 //this is not my code i just wanted a pretty cursor 
-document.addEventListener("mousemove", function (event) {
+document.addEventListener("mousemove", function(event) {
     customCursor.style.left = `${event.clientX}px`;
     customCursor.style.top = `${event.clientY}px`;
     customCursor.classList.add("is-visible");
 });
 
-document.addEventListener("mousedown", function () {
+document.addEventListener("mousedown", function() {
     customCursor.classList.add("is-clicking");
 });
 
-document.addEventListener("mouseup", function () {
+document.addEventListener("mouseup", function() {
     customCursor.classList.remove("is-clicking");
 });
 
-document.addEventListener("mouseleave", function () {
+document.addEventListener("mouseleave", function() {
     customCursor.classList.remove("is-visible");
 });
 
-document.addEventListener("mouseenter", function () {
+document.addEventListener("mouseenter", function() {
     customCursor.classList.add("is-visible");
 });
